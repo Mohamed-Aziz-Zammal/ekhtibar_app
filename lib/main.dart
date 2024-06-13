@@ -33,22 +33,14 @@ class ExamPage extends StatefulWidget {
 }
 
 class _ExamPageState extends State<ExamPage> {
-  List<Widget> answerResult = [
-    Padding(
-      padding: const EdgeInsets.all(3.0),
-      child: Icon(
-        Icons.thumb_up,
-        color: Colors.green,
-      ),
-    ),
-    Padding(
-      padding: const EdgeInsets.all(3.0),
-      child: Icon(
-        Icons.thumb_down,
-        color: Colors.red,
-      ),
-    ),
+  List<Widget> answerResult = [];
+  List<String> questions = [
+    "عدد الكواكب في المجموعة الشمسية هو ثمانية كواكب",
+    "القطط هي حيوانات لاحمة",
+    "الصين موجودة في القارة الافريقية",
+    "الارض مسطحة وليست كروية",
   ];
+  int questionNumber = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +57,7 @@ class _ExamPageState extends State<ExamPage> {
                 Image.asset("images/image-1.jpg"),
                 SizedBox(height: 20.0),
                 Text(
-                  "عدد الكواكب في المجموعة الشمسية هو ثمانية كواكب",
+                  questions[questionNumber],
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 24.0,
@@ -84,7 +76,9 @@ class _ExamPageState extends State<ExamPage> {
                 ),
               ),
               onPressed: () {
+                
                 setState(() {
+                  questionNumber = questionNumber + 1;
                   answerResult.add(
                     Padding(
                       padding: const EdgeInsets.all(3.0),
@@ -114,7 +108,9 @@ class _ExamPageState extends State<ExamPage> {
                 ),
               ),
               onPressed: () {
+                
                 setState(() {
+                  questionNumber++;
                   answerResult.add(
                     Padding(
                       padding: const EdgeInsets.all(3.0),
@@ -137,4 +133,3 @@ class _ExamPageState extends State<ExamPage> {
     );
   }
 }
-//test github
