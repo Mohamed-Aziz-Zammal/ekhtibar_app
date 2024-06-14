@@ -40,6 +40,19 @@ class _ExamPageState extends State<ExamPage> {
     "الصين موجودة في القارة الافريقية",
     "الارض مسطحة وليست كروية",
   ];
+  List<String> questionImage = [
+    "images/image-1.jpg",
+    "images/image-2.jpg",
+    "images/image-3.jpg",
+    "images/image-4.jpg",
+  ];
+  List<bool> answers = [
+    true,
+    true,
+    false,
+    false,
+  ];
+
   int questionNumber = 0;
 
   @override
@@ -54,7 +67,7 @@ class _ExamPageState extends State<ExamPage> {
             flex: 5,
             child: Column(
               children: [
-                Image.asset("images/image-1.jpg"),
+                Image.asset(questionImage[questionNumber]),
                 SizedBox(height: 20.0),
                 Text(
                   questions[questionNumber],
@@ -76,7 +89,12 @@ class _ExamPageState extends State<ExamPage> {
                 ),
               ),
               onPressed: () {
-                
+                bool coorectAnswer = answers[questionNumber];
+                if (coorectAnswer == true) {
+                  print("الاجابة صحيحة");
+                } else {
+                  print("الاجابة خاطئة");
+                }
                 setState(() {
                   questionNumber = questionNumber + 1;
                   answerResult.add(
@@ -108,7 +126,12 @@ class _ExamPageState extends State<ExamPage> {
                 ),
               ),
               onPressed: () {
-                
+                bool coorectAnswer = answers[questionNumber];
+                if (coorectAnswer == false) {
+                  print("الاجابة صحيحة");
+                } else {
+                  print("الاجابة خاطئة");
+                }
                 setState(() {
                   questionNumber++;
                   answerResult.add(
