@@ -35,7 +35,36 @@ class ExamPage extends StatefulWidget {
 
 class _ExamPageState extends State<ExamPage> {
   List<Widget> answerResult = [];
-  
+
+  void checkAnswer(bool whatUserPicked) {
+    bool coorectAnswer = questionGroup[questionNumber].questionAnswer;
+    setState(() {
+    if (coorectAnswer == whatUserPicked) {
+      answerResult.add(
+                    Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: Icon(
+                        Icons.thumb_up,
+                        color: Colors.green,
+                      ),
+                    ),
+                  );
+    } else {
+       answerResult.add(
+                    Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: Icon(
+                        Icons.thumb_down,
+                        color: Colors.red,
+                      ),
+                    ),
+                  );
+    }
+     
+                  questionNumber = questionNumber + 1;
+                  
+                });
+  }
 
   List<Question> questionGroup = [
     Question(
@@ -43,23 +72,33 @@ class _ExamPageState extends State<ExamPage> {
         i: "images/image-1.jpg",
         a: true),
     Question(
-        q: "القطط هي حيوانات لاحمة",
-        i: "images/image-2.jpg",
-        a: true),
+      q: "القطط هي حيوانات لاحمة", 
+      i: "images/image-2.jpg", 
+      a: true),
     Question(
         q: "الصين موجودة في القارة الافريقية",
         i: "images/image-3.jpg",
         a: false),
     Question(
-        q: "الارض مسطحة وليست كروية",
-        i: "images/image-4.jpg",
+      q: "الارض مسطحة وليست كروية", 
+      i: "images/image-4.jpg", 
+      a: false),
+    Question(
+        q: "باستطاعة الانسان البقاء علي قيد الحياة بدون اكل اللحوم",
+        i: "images/image-5.jpg",
+        a: true),
+    Question(
+      q: "الشمس تدور حول الارض و الارض تدور حول القمر", 
+      i: "images/image-6.jpg", 
+      a: false),
+    Question(
+        q: "الحيواناتلا تشعر بالالم",
+        i: "images/image-7.jpg",
         a: false),
+    
   ];
 
-  Question question1 = Question(
-      q: "عدد الكواكب في المجموعة الشمسية هو ثمانية كواكب",
-      i: "images/image-1.jpg",
-      a: true);
+  
 
   int questionNumber = 0;
 
@@ -97,24 +136,8 @@ class _ExamPageState extends State<ExamPage> {
                 ),
               ),
               onPressed: () {
-                bool coorectAnswer = questionGroup[questionNumber].questionAnswer;
-                if (coorectAnswer == true) {
-                  print("الاجابة صحيحة");
-                } else {
-                  print("الاجابة خاطئة");
-                }
-                setState(() {
-                  questionNumber = questionNumber + 1;
-                  answerResult.add(
-                    Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: Icon(
-                        Icons.thumb_up,
-                        color: Colors.green,
-                      ),
-                    ),
-                  );
-                });
+                checkAnswer(true);
+               
               },
               style: TextButton.styleFrom(
                 foregroundColor: Colors.white,
@@ -134,24 +157,8 @@ class _ExamPageState extends State<ExamPage> {
                 ),
               ),
               onPressed: () {
-                bool coorectAnswer = questionGroup[questionNumber].questionAnswer;
-                if (coorectAnswer == false) {
-                  print("الاجابة صحيحة");
-                } else {
-                  print("الاجابة خاطئة");
-                }
-                setState(() {
-                  questionNumber++;
-                  answerResult.add(
-                    Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: Icon(
-                        Icons.thumb_down,
-                        color: Colors.red,
-                      ),
-                    ),
-                  );
-                });
+                checkAnswer(false);
+                
               },
               style: TextButton.styleFrom(
                 foregroundColor: Colors.white,
