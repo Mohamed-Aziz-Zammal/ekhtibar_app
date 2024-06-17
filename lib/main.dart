@@ -1,3 +1,4 @@
+import 'package:ekhtibar_app/question.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -34,24 +35,31 @@ class ExamPage extends StatefulWidget {
 
 class _ExamPageState extends State<ExamPage> {
   List<Widget> answerResult = [];
-  List<String> questions = [
-    "عدد الكواكب في المجموعة الشمسية هو ثمانية كواكب",
-    "القطط هي حيوانات لاحمة",
-    "الصين موجودة في القارة الافريقية",
-    "الارض مسطحة وليست كروية",
+  
+
+  List<Question> questionGroup = [
+    Question(
+        q: "عدد الكواكب في المجموعة الشمسية هو ثمانية كواكب",
+        i: "images/image-1.jpg",
+        a: true),
+    Question(
+        q: "القطط هي حيوانات لاحمة",
+        i: "images/image-2.jpg",
+        a: true),
+    Question(
+        q: "الصين موجودة في القارة الافريقية",
+        i: "images/image-3.jpg",
+        a: false),
+    Question(
+        q: "الارض مسطحة وليست كروية",
+        i: "images/image-4.jpg",
+        a: false),
   ];
-  List<String> questionImage = [
-    "images/image-1.jpg",
-    "images/image-2.jpg",
-    "images/image-3.jpg",
-    "images/image-4.jpg",
-  ];
-  List<bool> answers = [
-    true,
-    true,
-    false,
-    false,
-  ];
+
+  Question question1 = Question(
+      q: "عدد الكواكب في المجموعة الشمسية هو ثمانية كواكب",
+      i: "images/image-1.jpg",
+      a: true);
 
   int questionNumber = 0;
 
@@ -67,10 +75,10 @@ class _ExamPageState extends State<ExamPage> {
             flex: 5,
             child: Column(
               children: [
-                Image.asset(questionImage[questionNumber]),
+                Image.asset(questionGroup[questionNumber].questionImage),
                 SizedBox(height: 20.0),
                 Text(
-                  questions[questionNumber],
+                  questionGroup[questionNumber].questionText,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 24.0,
@@ -89,7 +97,7 @@ class _ExamPageState extends State<ExamPage> {
                 ),
               ),
               onPressed: () {
-                bool coorectAnswer = answers[questionNumber];
+                bool coorectAnswer = questionGroup[questionNumber].questionAnswer;
                 if (coorectAnswer == true) {
                   print("الاجابة صحيحة");
                 } else {
@@ -126,7 +134,7 @@ class _ExamPageState extends State<ExamPage> {
                 ),
               ),
               onPressed: () {
-                bool coorectAnswer = answers[questionNumber];
+                bool coorectAnswer = questionGroup[questionNumber].questionAnswer;
                 if (coorectAnswer == false) {
                   print("الاجابة صحيحة");
                 } else {
