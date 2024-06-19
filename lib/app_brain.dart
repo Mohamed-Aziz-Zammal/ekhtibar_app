@@ -1,7 +1,12 @@
+
+
 import 'package:ekhtibar_app/question.dart';
 
 class AppBrain {
-    List<Question> questionGroup = [
+    
+    int _questionNumber = 0;
+
+    List<Question> _questionGroup = [
     Question(
         q: "عدد الكواكب في المجموعة الشمسية هو ثمانية كواكب",
         i: "images/image-1.jpg",
@@ -32,4 +37,22 @@ class AppBrain {
         a: false),
     
   ];
+
+  void nextQuestion() {
+      if(_questionNumber < _questionGroup.length - 1){
+        _questionNumber++;
+      }
+      
+    }
+
+  String getQuestionText(){
+    return _questionGroup[_questionNumber].questionText;
+  }
+  String getQuestionImage( ){
+    return _questionGroup[_questionNumber].questionImage;
+  }
+
+  bool getQuestionAnswer(){
+    return _questionGroup[_questionNumber].questionAnswer;
+  }
 }
