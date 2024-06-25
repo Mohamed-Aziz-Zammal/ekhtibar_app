@@ -32,7 +32,7 @@ class AppBrain {
       i: "images/image-6.jpg", 
       a: false),
     Question(
-        q: "الحيواناتلا تشعر بالالم",
+        q: "الحيوانات لا تشعر بالالم",
         i: "images/image-7.jpg",
         a: false),
     
@@ -54,5 +54,17 @@ class AppBrain {
 
   bool getQuestionAnswer(){
     return _questionGroup[_questionNumber].questionAnswer;
+  }
+
+  bool isFinished() {
+    if (_questionNumber >= _questionGroup.length - 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void reset(){
+    _questionNumber = 0;
   }
 }

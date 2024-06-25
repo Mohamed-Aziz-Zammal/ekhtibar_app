@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ekhtibar_app/app_brain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 AppBrain appBrain = AppBrain();
 
@@ -37,11 +38,13 @@ class ExamPage extends StatefulWidget {
 
 class _ExamPageState extends State<ExamPage> {
   List<Widget> answerResult = [];
+  int rightAnswers = 0;
 
   void checkAnswer(bool whatUserPicked) {
     bool coorectAnswer = appBrain.getQuestionAnswer();
     setState(() {
       if (coorectAnswer == whatUserPicked) {
+        rightAnswers++;
         answerResult.add(
           Padding(
             padding: const EdgeInsets.all(3.0),
@@ -63,7 +66,28 @@ class _ExamPageState extends State<ExamPage> {
         );
       }
 
-      appBrain.nextQuestion();
+      if (appBrain.isFinished() == true) {
+        Alert(
+          context: context,
+          title: "انتهاء الاختبار ",
+          desc: "لقد اجيب علي $rightAnswers اسءلة صحيحة من اصل 7",
+          buttons: [
+            DialogButton(
+              child: Text(
+                "ابدا من جديد",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () => Navigator.pop(context),
+              width: 120,
+            )
+          ],
+        ).show();
+        appBrain.reset();
+        answerResult = [];
+        rightAnswers = 0;
+      } else {
+        appBrain.nextQuestion();
+      }
     });
   }
 
